@@ -8,21 +8,18 @@ import org.springframework.web.servlet.ModelAndView;
 import ro.siit.airport.domain.Flight;
 import ro.siit.airport.repository.FlightRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
 public class FlightController {
 
     @Autowired
-    private final FlightRepository flightRepository;
-
-    public FlightController(FlightRepository flightRepository) {
-        this.flightRepository = flightRepository;
-    }
+    private FlightRepository flightRepository;
 
     @GetMapping("/flights/{flightNo}")
     public ModelAndView displayFlightByNumber(@PathVariable("flightNo") final String flightNo) {
-        final ModelAndView mav = new ModelAndView("flight-by-number");
+        final ModelAndView mav = new ModelAndView ("flight-by-number");
         final List<Flight> flights = flightRepository.findByFlightNo(flightNo);
         final String flight = flights.stream()
                 .findFirst()
@@ -31,6 +28,16 @@ public class FlightController {
                         + "\n" + f.getArrivalAirport().getName() + " " + f.getArrivalAirport().getCity())
                 .orElse("no data");
         mav.addObject("flight", flight);
+        return mav;
+    }
+
+    @GetMapping("/flights/city/{city}/date/{date}")
+    public ModelAndView displayFilteredFlights(@PathVariable("city") final String city,
+                                               @PathVariable("date") final String date) {
+        final ModelAndView mav = new ModelAndView ("filtered-flights");
+        final List<Flight> flights = flightRepository
+                .findFlightsByCustomRules(LocalDateTime.parse(date), city);
+        mav.addObject("flights", flights);
         return mav;
     }
 }

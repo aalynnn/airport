@@ -1,0 +1,53 @@
+/*body {
+  padding-top: 5rem;
+}
+.starter-template {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}*/
+
+
+{
+    margin: 0;
+    position: 0;
+}
+
+/*-----NAV.BAR-----*/
+#nav-bar
+{
+    position: sticky;
+    top:0;
+    z-index: 7,5;
+}
+.navbar-brand
+{
+    height-center: 0px;
+    padding-center: 0px;
+}
+.navbar-nav li
+{
+    padding: 0 10px;
+}
+.navbar-nav li a
+{
+    float: right;
+    text-align: left;
+}
+#nav-bar il li a:hover
+{
+    color: #007bff !important;
+}
+.navbar
+{
+    background: #fff;
+}
+.navbar-toggler
+{
+    border: none!important;
+}
+.nav-link
+{
+    color: #555!important;
+    font-weight: 600;
+    font-size: 16px;
+}
